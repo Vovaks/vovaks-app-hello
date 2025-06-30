@@ -43,6 +43,11 @@ const Navbar: React.FC = () => {
                   Counter 
                 </Link>
               </Menu.Item>
+              <Menu.Item key="4">
+              <Link to="/pokemon" >
+                  Pokemon 
+                </Link>
+              </Menu.Item>
               <Menu.Item key="0" onClick={() => handleLogout()}>
                 Logout
               </Menu.Item>

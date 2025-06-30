@@ -5,7 +5,7 @@ import { login } from '../store/reducers/auth';
 import { useAppDispatch, useAppSelector } from '../hooks';
 const LoginForm: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { isLoading, error } = useAppSelector(state => state.auth)
+  const { isLoading, error } = useAppSelector((state: { auth: any; }) => state.auth)
 
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -30,7 +30,7 @@ const LoginForm: React.FC = () => {
         <Input
           type="name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e: { target: { value: any; }; }) => setName(e.target.value)}
         />
       </Form.Item>
       <Form.Item
@@ -40,7 +40,7 @@ const LoginForm: React.FC = () => {
       >
         <Input.Password
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e: { target: { value: any; }; }) => setPassword(e.target.value)}
         />
       </Form.Item>
 

@@ -4,6 +4,7 @@ import Login from '../pages/Login';
 import Event from '../pages/Event';
 import News from '../pages/News';
 import Counter from '../pages/Counter';
+import Pokemon from '../pages/Pokemon';
 
 export interface IRoute {
     path: string;
@@ -17,6 +18,7 @@ export enum RouteNames {
     LOGIN = '/login',
     COUNTER = '/counter',
     EVENT = '/event',
+    POKEMON = '/pokemon',
     NEWS = '/'
 }
 
@@ -47,5 +49,11 @@ export const privateRoutes: IRoute[] = [
         exact: true,
         component: Counter,
         name: 'Counter'
+    },
+      {
+        path: RouteNames.POKEMON,
+        exact: true,
+        component: Pokemon,
+        name: 'Pokemon'
     },
 ]
