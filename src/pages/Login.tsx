@@ -4,8 +4,8 @@ import React from 'react';
 
 const Login: React.FC = () => {
     return (
-        <Layout>
-            <Row justify="center" align="middle" className="h100">
+        <Layout className="login-page">
+            <Row justify="center" align="middle">
                 <Card className="card">
                     <LoginForm />
                 </Card>

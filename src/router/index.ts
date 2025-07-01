@@ -15,7 +15,7 @@ export interface IRoute {
 }
 
 export enum RouteNames {
-    LOGIN = '/login',
+    LOGIN = '/',
     COUNTER = '/counter',
     EVENT = '/event',
     POKEMON = '/pokemon',

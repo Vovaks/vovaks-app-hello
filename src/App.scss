@@ -1,3 +1,5 @@
+@import 'variables';
+
 html,
 body,
 #root {
@@ -7,13 +9,52 @@ body,
 }
 
 .app-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: 95vh;
-  padding: 2vh 5vw;
+  height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: #333;
+  color: $black;
+}
+
+.header {
+  padding: 0 $padding-horizontal;
+  display: flex;
+  color:  $white-2;
+  position: absolute;
+}
+
+.navbar-welcome {
+  color: #fff;
+  font-weight: bold;
+  padding: 0 16px;
+}
+
+.app-content {
+  padding: $padding-vertical $padding-horizontal;
+  flex: 1;
+  overflow-y: auto;
+
+  .page-title {
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+    color: $black;
+    text-align: center;
+    margin: $spacing-unit 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, $gray, $blue);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: $shadow-text;
+    padding: $small-spacing $spacing-unit;
+    border-radius: $border-radius;
+    display: inline-block;
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: $font-size-large - 0.5rem;
+      letter-spacing: 1px;
+      padding: $small-spacing $small-spacing;
+    }
+  }
 }
 
 .pokemon-page {
@@ -24,40 +65,94 @@ body,
 
   h1 {
     text-align: center;
-    margin-bottom: 20px;
-    font-size: calc(10px + 2vmin);
+    margin-bottom: $spacing-unit;
+    font-size: $font-size-medium;
   }
 
   .search-input {
-    margin-bottom: 20px;
-    max-width: 800px;
+    margin-bottom: $spacing-unit;
+    max-width: 62vh;
     width: 100%;
   }
 
   .pokemon-table {
     flex: 1;
-    overflow-y: auto; /* Enable vertical scrolling for the table */
-    max-height: 50vh; /* Limit table height to half the viewport */
+    overflow-y: auto;
+    max-height: 50vh;
   }
 
   .pokemon-card {
-      max-height: 100vh;
+    max-width: 31vh;
+    margin: 0 auto;
+    max-height: 40vh;
+    overflow-y: auto;
 
     .ant-card-cover div {
-      height: 200px;
+      height: 15vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #f5f5f5;
-      color: #888;
+      background-color:$white-2;
+      color: $gray;
     }
+  }
+}
+
+.counter-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    text-align: center;
+    margin-bottom: $spacing-unit;
+    font-size: $font-size-medium;
+  }
+}
+
+.news-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    text-align: center;
+    margin-bottom: $spacing-unit;
   }
 }
 
 .errorMessage {
   height: auto;
-  color: #ff4d4d;
-  margin-top: 8px;
+  color: $red;
+  margin-top: $small-spacing;
   font-size: 0.9rem;
   line-height: 1.2;
+}
+
+// Login-specific styles
+.login-page {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .card {
+    width: $card-width;
+    max-width: $card-max-width;
+    padding: $card-padding;
+    border-radius: $border-radius;
+    box-shadow: $shadow-light;
+    background-color: $white-1;
+
+    .ant-card-body {
+      padding: $small-spacing; // Ensure form has internal padding
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      width: $card-max-width;
+      padding: $small-spacing;
+    }
+  }
 }
