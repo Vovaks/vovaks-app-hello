@@ -1,4 +1,4 @@
-import { Layout, Menu, Row, Col, message } from 'antd';
+import { Layout, Menu, Row, Col, message, Tooltip } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks';
@@ -50,7 +50,10 @@ const Navbar: React.FC = () => {
         </Col>
         <Col span={3}>
           <span key={'welcome_' + username} className="navbar-welcome">
-            Welcome!, {username} <LogoutOutlined onClick={() => handleLogout()} />
+            Welcome!, {username} 
+              <Tooltip placement="topLeft" title={'logout'} >
+                <LogoutOutlined onClick={() => handleLogout()} />
+              </Tooltip>
           </span>
         </Col>
       </Row>

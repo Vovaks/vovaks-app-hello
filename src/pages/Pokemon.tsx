@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, lazy } from 'react';
 import { Input, Row, Col, Spin, Alert } from 'antd';
-import PokemonList from '../components/Pokemon/PokemonList';
 import PokemonCard from '../components/Pokemon/PokemonCard';
 import { useGetPokemonListQuery } from '../store/reducers/pokemon/pokemonAPI';
+
+const PokemonList = lazy(() => import('../components/Pokemon/PokemonList'));
 
 const Pokemon: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,7 +20,6 @@ const Pokemon: React.FC = () => {
 
   return (
     <div className="pokemon-page">
-      <h1>Pokémon Explorer</h1>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Input
