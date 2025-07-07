@@ -1,35 +1,34 @@
-import React, { useState, lazy } from 'react';
-import { Input, Row, Col, Spin, Alert } from 'antd';
-import PokemonCard from '../components/Pokemon/PokemonCard';
-import { useGetPokemonListQuery } from '../store/reducers/pokemon/pokemonAPI';
+import React, { useState, lazy } from 'react'
+import { Input, Row, Col, Spin, Alert } from 'antd'
+import PokemonCard from '../components/Pokemon/PokemonCard'
+import { useGetPokemonListQuery } from '../store/reducers/pokemon/pokemonAPI'
 
-const PokemonList = lazy(() => import('../components/Pokemon/PokemonList'));
+const PokemonList = lazy(() => import('../components/Pokemon/PokemonList'))
 
 const Pokemon: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedPokemon, setSelectedPokemon] = useState<string | null>(null);
-  const [page, setPage] = useState(1);
-  const limit = 20;
+  const [searchTerm, setSearchTerm] = useState('')
+  const [selectedPokemon, setSelectedPokemon] = useState<string | null>(null)
+  const [page, setPage] = useState(1)
+  const limit = 20
 
+  const { data, error, isLoading } = useGetPokemonListQuery({ page, limit })
 
-  const { data, error, isLoading } = useGetPokemonListQuery({ page, limit });
-
-  const filteredPokemon = data?.results.filter(pokemon =>
-    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredPokemon = data?.results.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  )
 
   return (
-    <div className="pokemon-page">
+    <div className='pokemon-page'>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Input
-            placeholder="Search Pokémon by name"
+            placeholder='Search Pokémon by name'
             value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
-            className="search-input"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className='search-input'
           />
-          {isLoading && <Spin tip="Loading Pokémon..." />}
-          {error && <Alert message="Error fetching Pokémon" type="error" />}
+          {isLoading && <Spin tip='Loading Pokémon...' />}
+          {error && <Alert message='Error fetching Pokémon' type='error' />}
           {filteredPokemon && (
             <PokemonList
               pokemon={filteredPokemon}
@@ -46,7 +45,7 @@ const Pokemon: React.FC = () => {
         </Col>
       </Row>
     </div>
-  );
-};
+  )
+}
 
-export default Pokemon;
+export default Pokemon

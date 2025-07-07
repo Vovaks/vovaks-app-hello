@@ -1,14 +1,14 @@
-import React from 'react';
-import { Table, Button } from 'antd';
-import { IPokemon } from '../../models/IPokemon'; 
+import React from 'react'
+import { Table, Button } from 'antd'
+import { IPokemon } from '../../store/reducers/pokemon/pokemon.types'
 
 interface PokemonListProps {
-  pokemon: IPokemon[];
-  onSelect: (name: string) => void;
-  page: number;
-  total: number;
-  limit: number;
-  onPageChange: (page: number) => void;
+  pokemon: IPokemon[]
+  onSelect: (name: string) => void
+  page: number
+  total: number
+  limit: number
+  onPageChange: (page: number) => void
 }
 
 const PokemonList: React.FC<PokemonListProps> = ({
@@ -25,18 +25,18 @@ const PokemonList: React.FC<PokemonListProps> = ({
       dataIndex: 'name',
       key: 'name',
       render: (name: string) => (
-        <Button type="link" onClick={() => onSelect(name)}>
+        <Button type='link' onClick={() => onSelect(name)}>
           {name}
         </Button>
       ),
     },
-  ];
+  ]
 
   return (
     <Table
       dataSource={pokemon}
       columns={columns}
-      rowKey="name"
+      rowKey='name'
       pagination={{
         current: page,
         pageSize: limit,
@@ -44,7 +44,7 @@ const PokemonList: React.FC<PokemonListProps> = ({
         onChange: onPageChange,
       }}
     />
-  );
-};
+  )
+}
 
-export default PokemonList;
+export default PokemonList

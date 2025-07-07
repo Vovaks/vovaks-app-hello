@@ -17,6 +17,8 @@
 .env.test.local
 .env.production.local
 
+.vscode
+
 yarn.lock
 
 npm-debug.log*
