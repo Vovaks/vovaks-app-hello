@@ -1,6 +1,4 @@
 import React from 'react';
-import { Layout } from 'antd';
-import Navbar from '../components/Navbar';
 import { Counter } from '../components/Counter/index';
 
 const CounterPage: React.FC = () => {

@@ -1,26 +1,35 @@
-$gray: #55565a;
-$blue: #4b5cc4;
-$white-1: #ffffff;
-$white-2: #f0f2f5;
-$black: #1a1a1a;
-$red: #ff4d4d;
+//variables.css
+:root {
+  // Colors
+  --gray: #55565a; // Neutral gray for UI elements
+  --blue: #4b5cc4; // Primary blue for gradients or accents
+  --white-1: #ffffff; // Pure white
+  --white-2: #f0f2f5; // Off-white for backgrounds
+  --black: #1a1a1a; // Near-black for text
+  --red: #ff4d4d; // Error or accent color
 
-$font-size-large: 2.5rem;
-$font-size-medium: calc(1.3vh + 2vmin);
-$font-weight-bold: 700;
+  // Typography
+  --font-size-large: 2.5rem;
+  --font-size-medium: calc(1.3vh + 2vmin);
+  --font-weight-bold: 700;
 
-$spacing-unit: 2.6vh;
-$small-spacing: 1vh;
-$padding-horizontal: 5vw;
-$padding-vertical: 2vh;
+  // Spacing
+  --spacing-unit: 2.6vh;
+  --small-spacing: 1vh;
+  --padding-horizontal: 5vw;
+  --padding-vertical: 2vh;
 
-$border-radius: 1vh;
-$shadow-light: 0 0.26vh 0.52vh rgba(0, 0, 0, 0.1);
-$shadow-text: 0.13vh 0.13vh 0.39vh rgba(0, 0, 0, 0.2);
+  // Borders and Shadows
+  --border-radius: 1vh;
+  --shadow-light: 0 0.26vh 0.52vh rgba(0, 0, 0, 0.1);
+  --shadow-text: 0.13vh 0.13vh 0.39vh rgba(0, 0, 0, 0.2);
 
-$breakpoint-mobile: 768px;
+  // Breakpoints
+  --breakpoint-mobile: 768px;
 
-$card-width: 52vh;
-$card-max-width: 90%;
-$card-padding: 3.1vh;
-$login-bg: linear-gradient(135deg, #e0eafc, #cfdef3);
+  // Card Layout
+  --card-width: 52vh;
+  --card-max-width: 90%;
+  --card-padding: 3.1vh;
+  --login-bg: linear-gradient(135deg, #e0eafc, #cfdef3);
+}
