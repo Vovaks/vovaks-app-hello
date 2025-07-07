@@ -6,10 +6,8 @@ export interface IUser {
 }
 
 export interface IAuthState {
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  error: string | null;
-  user: IUser | null;
+  isAuthenticated: boolean
+  isLoading: boolean
+  error: string | null
+  user: IUser | null
 }
-
-
