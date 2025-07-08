@@ -1,0 +1,98 @@
+trigger:
+  - main
+
+variables:
+  azureSubscription: '3b56f513-bd58-4fb6-86fb-e38280ac7316'
+  webAppName: 'hello-world-vovaks'
+  environmentName: 'hello-world-vovaks'
+  vmImageName: 'ubuntu-latest'
+  nodeVersion: '20.x'
+
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:
+  - job: Build
+    displayName: Build Job
+    pool:
+      vmImage: $(vmImageName)
+
+    steps:
+    # Install Node.js
+    - task: NodeTool@0
+      displayName: 'Install Node.js'
+      inputs:
+        versionSpec: $(nodeVersion)
+
+    # Install Yarn
+    - script: npm install -g yarn
+      displayName: 'Install Yarn'
+
+    # Install dependencies with Yarn
+    - script: yarn install
+      displayName: 'Install Dependencies'
+
+    # Run Prettier formatting
+    - script: yarn format
+      displayName: 'Run Prettier Formatting'
+      condition: succeeded()
+
+    # Run ESLint with fix
+    - script: yarn lint:fix
+      displayName: 'Run ESLint with Fix'
+      condition: succeeded()
+
+    # Run tests
+    - script: yarn test --watchAll=false
+      displayName: 'Run Tests'
+      condition: succeeded()
+
+    # Build the React app
+    - script: yarn build
+      displayName: 'Build React App'
+
+    # Archive the build output
+    - task: ArchiveFiles@2
+      displayName: 'Archive Files'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/build'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        replaceExistingArchive: true
+
+    # Publish build artifacts
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifacts'
+      inputs:
+        pathToPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        artifactName: 'drop'
+        publishLocation: 'Container'
+
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy Job
+    environment: $(environmentName)
+    pool:
+      vmImage: $(vmImageName)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          # Deploy to Azure App Service
+          - task: AzureRmWebAppDeployment@4
+            displayName: 'Deploy to Azure App Service'
+            inputs:
+              azureSubscription: $(azureSubscription)
+              appType: 'webAppLinux'
+              WebAppName: $(webAppName)
+              packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+              RuntimeStack: 'NODE|20-lts'
+              StartupCommand: 'npx serve -s build'
+              # Optional: Add environment variables for deployment
+              AppSettings: |
+                -REACT_APP_ENV example-value
