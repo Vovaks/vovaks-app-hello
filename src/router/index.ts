@@ -19,7 +19,7 @@ export enum RouteNames {
   COUNTER = '/counter',
   EVENT = '/event',
   POKEMON = '/pokemon',
-  NEWS = '/',
+  NEWS = '/news',
 }
 
 export const publicRoutes: IRoute[] = [
