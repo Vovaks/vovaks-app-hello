@@ -1,6 +1,6 @@
+import React from 'react'
 import { Layout, Row, Card } from 'antd'
 import LoginForm from '../components/LoginForm'
-import React from 'react'
 
 const Login: React.FC = () => {
   return (

@@ -14,10 +14,10 @@ interface PokemonListProps {
 const PokemonList: React.FC<PokemonListProps> = ({
   pokemon,
   onSelect,
-  page,
-  total,
-  limit,
-  onPageChange,
+  // page,
+  // total,
+  // limit,
+  // onPageChange,
 }) => {
   const columns = [
     {
@@ -37,12 +37,13 @@ const PokemonList: React.FC<PokemonListProps> = ({
       dataSource={pokemon}
       columns={columns}
       rowKey='name'
-      pagination={{
-        current: page,
-        pageSize: limit,
-        total,
-        onChange: onPageChange,
-      }}
+      size='small'
+      // pagination={{
+      //   current: page,
+      //   pageSize: 10,
+      //   total,
+      //   onChange: onPageChange,
+      // }}
     />
   )
 }

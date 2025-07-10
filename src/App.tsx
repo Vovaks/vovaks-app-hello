@@ -2,33 +2,34 @@ import React, { FC, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import AppRouter from './components/AppRouter'
 import { Layout } from 'antd'
-import { useActions } from './hooks/useActions'
-import { IUser } from './store/reducers/auth/auth.types'
+import { publicRoutes } from './router'
 
 import './App.scss'
 
 const App: FC = () => {
-  const { setUser, setAuth } = useActions()
   const location = useLocation()
   const navigate = useNavigate()
 
-  // Persist current path to localStorage whenever the route changes
   useEffect(() => {
-    localStorage.setItem('lastPath', location.pathname)
+    const publicPaths = publicRoutes.map((route) => route.path)
+
+    if (!publicPaths.includes(location.pathname)) {
+      localStorage.setItem('lastPath', location.pathname)
+    }
   }, [location])
 
   useEffect(() => {
     const auth = localStorage.getItem('auth')
     const lastPath = localStorage.getItem('lastPath')
+
     if (auth) {
-      // TODO: Check token validity with server and handle errors
-      setAuth(true)
-      setUser({ username: localStorage.getItem('username') || '' } as IUser)
+      if (lastPath && lastPath !== '/') {
+        navigate(lastPath)
+      } else {
+        navigate('/login')
+      }
     }
-    if (lastPath && lastPath !== '/') {
-      navigate(lastPath)
-    }
-  }, [setAuth, setUser, navigate])
+  }, [navigate])
 
   return (
     <Layout className='h100'>

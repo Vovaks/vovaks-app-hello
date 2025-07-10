@@ -1,4 +1,4 @@
-import React, { version } from 'react'
+import React from 'react'
 import { Layout } from 'antd'
 import Navbar from '../Navbar' // Adjust the import path as necessary
 const { Content } = Layout
@@ -18,7 +18,7 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ isAuthenticated, children
       )}
       <Content className='app-content'>{children}</Content>
       <footer className={'app-footer'}>
-        © {new Date().getFullYear()} - v{version}
+        © {new Date().getFullYear()} - v{process.env.REACT_APP_VERSION}
       </footer>
     </Layout>
   )
